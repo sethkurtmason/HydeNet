@@ -237,19 +237,19 @@ cpt_workhorse <- function(variables, dependentVar, independentVars,
   
   joint <- 
     data %>% 
-    dplyr::group_by_(.dots = ..vars) %>%  
-    dplyr::summarise_(wt = ~sum(wt))
+    dplyr::group_by(.dots = ..vars) %>%  
+    dplyr::summarise(wt = ~sum(wt))
  
   marginal <- 
     joint %>% 
-    dplyr::group_by_(.dots = ..independentVars) %>% 
-    dplyr::summarise_(sumWt = ~sum(wt))
+    dplyr::group_by(.dots = ..independentVars) %>% 
+    dplyr::summarise(sumWt = ~sum(wt))
   
   cpt <- 
     dplyr::left_join(joint, marginal, 
                      by = independentVars) %>%
-    dplyr::mutate_(p = ~ wt / sumWt) %>% 
-    dplyr::select_(~-c(wt, sumWt)) %>%
+    dplyr::mutate(p = ~ wt / sumWt) %>% 
+    dplyr::select(~-c(wt, sumWt)) %>%
     plyr::daply(c(vars[-1], vars[1]), 
                 function(x) x$p)
   
