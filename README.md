@@ -24,13 +24,8 @@ information) involving decision and utility nodes are also supported.
 
 `HydeNet` may be installed using 
 
-`install.packages("HydeNet")`
-
-Patched versions from GitHub may be installed using
-
 ```
-setRepositories(ind=1:2)
-devtools::install_github("nutterb/HydeNet")
+devtools::install_github("sethkurtmason/HydeNet")
 ```
 
 Please note that you may need to use the `ref` argument in `install_github` to get the latest
